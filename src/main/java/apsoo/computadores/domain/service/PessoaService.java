@@ -27,4 +27,13 @@ public class PessoaService {
     public Optional <Pessoa>buscaPorId(UUID id){
         return  repository.findById(id);
     }
+
+    /*
+    Função que realizará a busca do pessoa cadastrada e retornará seu nome
+    para poder exibir logo no início da aplicação após informado o cpf
+    */
+
+    public Optional <String> buscaPessoa(UUID id){
+      return Optional.ofNullable(repository.findById(id).get().getNome());
+    }
 }

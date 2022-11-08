@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vendadecomputadoresjdbc.controllers.CarrinhoController">
+<VBox minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.computadores.domain.controller.CarrinhosController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
