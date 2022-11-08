@@ -21,5 +21,8 @@ public class Funcionario {
     private LocalDateTime data_contratacao;
     private Long comissao;
     private  boolean pf_gerencia;
-    private UUID pessoaid;
+
+    @OneToOne
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoaid;
 }
