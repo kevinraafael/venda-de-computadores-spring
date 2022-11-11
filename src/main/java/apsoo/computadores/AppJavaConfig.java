@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 public class AppJavaConfig {
 
     @Autowired
+    @Lazy
     SpringFXMLLoader springFXMLLoader;
 
 //    @Bean
@@ -24,13 +25,13 @@ public class AppJavaConfig {
 //    }
 
     @Bean
-    public ResourceBundle resourceBundle(){
+    public ResourceBundle resourceBundle() {
         return ResourceBundle.getBundle("Bundle");
     }
 
     @Bean
-    @Lazy(value =true) //Stage only created after Spring Context
-    public  StageManager stageManager(Stage stage) throws IOException{
-        return new StageManager(springFXMLLoader,stage);
+    @Lazy(value = true) //Stage only created after Spring Context
+    public StageManager stageManager(Stage stage) throws IOException {
+        return new StageManager(springFXMLLoader, stage);
     }
 }

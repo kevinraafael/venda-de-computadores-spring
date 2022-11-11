@@ -1,12 +1,15 @@
 package apsoo.computadores;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * Will load the FXML hierarchy as specified in the load method and register
@@ -24,11 +27,11 @@ public class SpringFXMLLoader {
         this.context = context;
     }
 
-    public Parent load(String fxmlPath) throws IOException {
+    public Parent load(String fxmlPath) throws IOException, URISyntaxException {
         FXMLLoader loader = new FXMLLoader();
         loader.setControllerFactory(context::getBean); //Spring now FXML Controller Factory
         loader.setResources(resourceBundle);
-        loader.setLocation(getClass().getResource(fxmlPath));
+        loader.setLocation(getClass().getClassLoader().getResource(fxmlPath).toURI().toURL());
         return loader.load();
     }
 }
