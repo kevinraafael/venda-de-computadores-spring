@@ -18,56 +18,25 @@ public class Venda {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo", nullable = false)
 
-//    @OneToOne
-//    @JoinColumn(name = "forma_pagamento")
-//    private Pagamento formaPagemnto;
-//
-//    @OneToOne
-//    @JoinColumn(name = "cliente_id")
-//    private Cliente cliente;
-//
-//    @OneToOne
-//    @JoinColumn(name = "funcionario_id")
-//    private Funcionario funcionario;
+    @OneToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
+
+    @OneToOne
+    @JoinColumn(name = "forma_pagamento")
+    private Pagamento formaPagemnto;
+
+    @OneToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+
     private int codigo;
 
 
     private Double valor;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-//    public Pagamento getFormaPagemnto() {
-//        return formaPagemnto;
-//    }
-
-//    public void setFormaPagemnto(Pagamento formaPagemnto) {
-//        this.formaPagemnto = formaPagemnto;
-//    }
-//
-//    public Cliente getCliente() {
-//        return cliente;
-//    }
-//
-//    public void setCliente(Cliente cliente) {
-//        this.cliente = cliente;
-//    }
-//
-//    public Funcionario getFuncionario() {
-//        return funcionario;
-//    }
-//
-//    public void setFuncionario(Funcionario funcionario) {
-//        this.funcionario = funcionario;
-//    }
 
     public int getCodigo() {
         return codigo;
