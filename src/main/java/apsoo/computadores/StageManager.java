@@ -19,10 +19,12 @@ public class StageManager {
     public StageManager(SpringFXMLLoader springFXMLLoader, Stage stage) {
         this.springFXMLLoader = springFXMLLoader;
         this.primaryStage = stage;
+
     }
 
     public void switchScene(final FxmlView view) {
         Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
+        String  pathTest = view.getFxmlFile();
         show(viewRootNodeHierarchy, view.getTitle());
     }
 

@@ -12,7 +12,7 @@ public enum FxmlView {
 
         @Override
         public String getFxmlFile() {
-            return "src/main/resources/views/CarrinhoDeCompras.fxml";
+            return "/src/main/resources/views/CarrinhoDeCompras.fxml";
         }
     },
     LOGIN {
@@ -23,7 +23,7 @@ public enum FxmlView {
 
         @Override
         public String getFxmlFile() {
-            return "/main/resources/views/CarrinhoDeCompras.fxml";
+            return "/src/main/resources/views/CarrinhoDeCompras.fxml";
         }
     };
 
