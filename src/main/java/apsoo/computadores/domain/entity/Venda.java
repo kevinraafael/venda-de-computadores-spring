@@ -39,17 +39,8 @@ public class Venda {
 
     private Double valor;
 
-
-    public int getCodigo() {
-        return codigo;
-    }
-
     public void setCodigo(int codigo) {
         this.codigo = codigo;
-    }
-
-    public Double getValor() {
-        return valor;
     }
 
     public void setValor(Double valor) {

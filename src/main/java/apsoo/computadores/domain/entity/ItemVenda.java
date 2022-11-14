@@ -31,6 +31,9 @@ public class ItemVenda {
 
     private double valorVendido ;
 
+    public static ItemVenda criaItem(){
+        return  new ItemVenda();
+    }
 
 
 

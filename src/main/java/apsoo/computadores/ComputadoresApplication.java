@@ -14,6 +14,8 @@ import java.sql.Date;
 public class ComputadoresApplication implements CommandLineRunner {
 
 	@Autowired
+	private DevolucaoDao devolucaoDao;
+	@Autowired
 	private ItemVendaDao itemVendaDao;
 
 	@Autowired
@@ -43,7 +45,7 @@ public class ComputadoresApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf("00011122236");
+		pessoa.setCpf("14785236978");
 		pessoa.setNome("Fulano de Tal");
 		pessoa.setEndereco("UFMS");
 		pessoa.setTelefone("6799999999");
@@ -93,13 +95,21 @@ public class ComputadoresApplication implements CommandLineRunner {
 
 		computadorDao.save(computador);
 
-		ItemVenda itemVenda = new ItemVenda();
+		ItemVenda itemVenda = ItemVenda.criaItem();
 		itemVenda.setVenda(venda);
 		itemVenda.setQtdVendida(1);
 		itemVenda.setValorVendido(100);
 		itemVenda.setComputador(computador);
 
 		itemVendaDao.save(itemVenda);
+
+		Devolucao devolucao = new Devolucao();
+		devolucao.setItemVenda(itemVenda);
+		devolucao.setFuncionario(funcionario);
+		devolucao.setMotivo("Teste");
+		devolucao.dataDevolucao(new java.util.Date());
+
+		devolucaoDao.save(devolucao);
 
 
 
