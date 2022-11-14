@@ -1,6 +1,7 @@
-package apsoo.computadores.domain.repository;
+package apsoo.repository;
 
-import apsoo.computadores.domain.entity.Pessoa;
+
+import apsoo.entity.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vendadecomputadoresjdbc.controllers.CarrinhoController">
+<VBox minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.CarrinhosController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -39,7 +39,7 @@
                     <Font name="System Bold" size="14.0" />
                 </font></Label>
             <Label fx:id="nomeCliente" prefHeight="33.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" contentDisplay="TOP" onAction="#buscaCliente" text="Buscar" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2">
+            <Button alignment="CENTER" contentDisplay="TOP"  text="Buscar" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2">
                 <GridPane.margin>
                     <Insets left="8.0" />
                 </GridPane.margin></Button>
