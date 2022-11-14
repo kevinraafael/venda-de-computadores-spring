@@ -31,6 +31,8 @@ public class Venda {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @OneToMany
+    private List<ItemVenda> itemVendas;
 
     private int codigo;
 

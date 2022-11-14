@@ -1,0 +1,1 @@
+ALTER TABLE public.item_venda ALTER COLUMN valor_vendido TYPE numeric;

@@ -13,6 +13,11 @@ import java.sql.Date;
 @SpringBootApplication
 public class ComputadoresApplication implements CommandLineRunner {
 
+	@Autowired
+	private ItemVendaDao itemVendaDao;
+
+	@Autowired
+	private ComputadorDao computadorDao;
 
 	@Autowired
 	private PessoaDao pessoaRepository;
@@ -38,7 +43,7 @@ public class ComputadoresApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf("14785236987");
+		pessoa.setCpf("00011122236");
 		pessoa.setNome("Fulano de Tal");
 		pessoa.setEndereco("UFMS");
 		pessoa.setTelefone("6799999999");
@@ -77,6 +82,26 @@ public class ComputadoresApplication implements CommandLineRunner {
 		venda.setFormaPagemnto(pag);
 		venda.setValor(100.75);
 		vendaDao.save(venda);
+
+		Computador computador = new Computador();
+		computador.setSo("Windows");
+		computador.setArmazenamento("250gb");
+		computador.setModelo("Intel");
+		computador.setProcessador("AMD");
+		computador.setValor(3000.0);
+		computador.setMemoria("8 RAM");
+
+		computadorDao.save(computador);
+
+		ItemVenda itemVenda = new ItemVenda();
+		itemVenda.setVenda(venda);
+		itemVenda.setQtdVendida(1);
+		itemVenda.setValorVendido(100);
+		itemVenda.setComputador(computador);
+
+		itemVendaDao.save(itemVenda);
+
+
 
 
 	}
