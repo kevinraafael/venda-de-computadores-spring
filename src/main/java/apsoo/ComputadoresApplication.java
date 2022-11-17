@@ -3,14 +3,16 @@ package apsoo;
 import apsoo.dao.*;
 import apsoo.entity.*;
 
+import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.sql.Date;
-
-
+// Classe para fazer a Inserção no Banco
+@EntityScan("apsoo") //Procurar todos os beans de entidade
 @SpringBootApplication
 public class ComputadoresApplication implements CommandLineRunner {
 
@@ -37,6 +39,7 @@ public class ComputadoresApplication implements CommandLineRunner {
 	@Autowired
 	FuncionarioDao funcionarioDao;
 	public static void main(String[] args) {
+		//Application.launch(AplicacaoJavaFx.class, args);
 		SpringApplication.run(ComputadoresApplication.class, args);
 
 
@@ -46,7 +49,7 @@ public class ComputadoresApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf("14785266978");
+		pessoa.setCpf("14785467978");
 		pessoa.setNome("Fulano de Tal");
 		pessoa.setEndereco("UFMS");
 		pessoa.setTelefone("6799999999");
