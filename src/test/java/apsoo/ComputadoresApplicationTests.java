@@ -1,4 +1,4 @@
-package apsoo.computadores;
+package apsoo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

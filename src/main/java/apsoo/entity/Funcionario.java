@@ -6,20 +6,25 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
+
 @Table(name="funcionario")
 public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String matricula;
-    private LocalDateTime data_contratacao;
-    private Long comissao;
+    private Date data_contratacao;
+    private Double comissao;
     private  boolean pf_gerencia;
-    private UUID pessoaid;
+
+    @OneToOne
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
+
 }

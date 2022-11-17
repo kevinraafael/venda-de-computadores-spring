@@ -1,10 +1,8 @@
 package apsoo.service;
 
-
-import apsoo.repository.PessoaRepository;
 import apsoo.entity.Pessoa;
+import apsoo.dao.PessoaDao;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PessoaService {
 
-    private final  PessoaRepository repository;
+    private final PessoaDao repository;
 
     public Pessoa salvar(Pessoa pessoa ){
     return  repository.save(pessoa);
