@@ -64,3 +64,9 @@ a edição é visual e o arquivo é salvo no formato .fxml
 Classes java responsáveis por responder eventos gerados pelas views e
 adicionar comportamentos dinamicos.
 @fxml -> anotação que faz o mapeamento entre o controlador e a view.
+
+# Componentização com javaFX
+ por meio do comando abaixo podemos incluir um outro arquivo xml dentro de outro
+ Isso é interessante para trabalhar com componentes.
+ Um exemplo seria a header da página com o tipico menu 
+ <fx:include source ="meuComponent.fxml"/>

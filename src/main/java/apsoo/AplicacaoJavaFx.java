@@ -1,6 +1,7 @@
 package apsoo;
 
 import apsoo.controller.CarrinhosController;
+import apsoo.controller.FinalizaVenda;
 import javafx.application.Application;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,7 +15,7 @@ import net.rgielen.fxweaver.core.FxWeaver;
 
 public class AplicacaoJavaFx extends Application {
 
-    private ConfigurableApplicationContext contextoSpring;
+    public static ConfigurableApplicationContext contextoSpring;
 
     @Override
     public void init() {
@@ -34,7 +35,7 @@ public class AplicacaoJavaFx extends Application {
     @Override
     public void start(Stage stage) {
         FxWeaver fxWeaver = contextoSpring.getBean(FxWeaver.class);
-        Parent root = fxWeaver.loadView(CarrinhosController.class);
+        Parent root = fxWeaver.loadView(FinalizaVenda.class);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
