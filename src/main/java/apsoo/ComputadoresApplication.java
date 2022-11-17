@@ -1,7 +1,8 @@
-package apsoo.computadores;
+package apsoo;
 
-import apsoo.computadores.domain.dao.*;
-import apsoo.computadores.domain.entity.*;
+import apsoo.dao.*;
+import apsoo.entity.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -45,7 +46,7 @@ public class ComputadoresApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf("14785236978");
+		pessoa.setCpf("14785266978");
 		pessoa.setNome("Fulano de Tal");
 		pessoa.setEndereco("UFMS");
 		pessoa.setTelefone("6799999999");
@@ -110,6 +111,7 @@ public class ComputadoresApplication implements CommandLineRunner {
 		devolucao.dataDevolucao(new java.util.Date());
 
 		devolucaoDao.save(devolucao);
+		devolucaoDao.findAll();
 
 
 

@@ -1,7 +1,7 @@
-package apsoo.computadores.domain.service;
+package apsoo.service;
 
-import apsoo.computadores.domain.entity.Pessoa;
-import apsoo.computadores.domain.dao.PessoaDao;
+import apsoo.entity.Pessoa;
+import apsoo.dao.PessoaDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

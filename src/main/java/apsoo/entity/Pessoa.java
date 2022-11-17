@@ -1,4 +1,4 @@
-package apsoo.computadores.domain.entity;
+package apsoo.entity;
 
 
 

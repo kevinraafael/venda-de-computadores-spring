@@ -1,8 +1,7 @@
-package apsoo.computadores.domain.controller;
+package apsoo.controller;
 
 
-import apsoo.computadores.domain.entity.Pessoa;
-import apsoo.computadores.domain.service.PessoaService;
+import apsoo.service.PessoaService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -1,13 +1,12 @@
-package apsoo.computadores.domain.dao;
+package apsoo.dao;
 
-import apsoo.computadores.domain.entity.Venda;
+import apsoo.entity.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface VendaDao extends JpaRepository<Venda, UUID> {
-
+public interface PessoaDao extends JpaRepository<Pessoa,UUID > {
 
 }

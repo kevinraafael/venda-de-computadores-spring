@@ -1,6 +1,6 @@
-package apsoo.computadores.domain.dao;
+package apsoo.dao;
 
-import apsoo.computadores.domain.entity.Pagamento;
+import apsoo.entity.Pagamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.UUID;
