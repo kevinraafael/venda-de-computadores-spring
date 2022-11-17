@@ -1,6 +1,7 @@
 package apsoo.controller;
 
 
+import apsoo.AplicacaoJavaFx;
 import apsoo.AplicacaoSpring;
 import apsoo.service.PessoaService;
 import javafx.event.ActionEvent;
@@ -24,11 +25,8 @@ import net.rgielen.fxweaver.core.FxmlView;
 
 @Component
 @FxmlView("compras.fxml")
-public class CarrinhosController extends  Controller {
+public class CarrinhosController {
 
-
-
-    //    private Node ancora;
     @FXML
     private Button finalizaVenda;
 
@@ -61,38 +59,13 @@ public class CarrinhosController extends  Controller {
     public CarrinhosController() {
     }
 
-    //    public void btnFinalizaVenda(ActionEvent actionEvent) {
-//       carregarScene(viewFinalizaVenda, FinalizaVenda.class);
-//
-//    }
-//    public String buscaPessoa(Pessoa p){
-//        if(service.buscaPorId(p.getId())!=null){
-//            return  p.getNome();
-//        }
-//         return  null;
-//    }
-    @FXML
-    public void btnFinalizaVenda(ActionEvent e) {
-        //carregarScene(viewFinalizaVenda, FinalizaVenda.class);
-    }
-
-//    @FXML
-//    public void initialize() {
-//        String[] args = new String[0];
-//
-//        this.contextoSpring = new SpringApplicationBuilder()
-//                .sources(AplicacaoSpring.class)
-//                .run(args);
-//
-//    }
-
     public void carregarScene(Node parent, Class controller) {
 
         // Utiliza o parente para acessar a Stage
         Stage stage = (Stage) parent.getScene().getWindow();
 
         // Pegar o Bean do JavaFXWeaver
-        FxWeaver fxWeaver = contextoSpring.getBean(FxWeaver.class);
+        FxWeaver fxWeaver = AplicacaoJavaFx.contextoSpring.getBean(FxWeaver.class);
 
         // O FXWeaver carrega o controlador na memória
         Parent root = (Parent) fxWeaver.loadView(controller);
@@ -106,4 +79,10 @@ public class CarrinhosController extends  Controller {
         stage.show();
 
     }
+
+    @FXML
+    public void btnFinalizaVenda(ActionEvent e) {
+        carregarScene(viewFinalizaVenda, FinalizaVenda.class);
+    }
+
 }
