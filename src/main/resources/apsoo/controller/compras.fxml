@@ -39,7 +39,7 @@
                     <Font name="System Bold" size="14.0" />
                 </font></Label>
             <Label fx:id="nomeCliente" prefHeight="33.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" contentDisplay="TOP"  text="Buscar" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2">
+            <Button alignment="CENTER" contentDisplay="TOP" onAction="#buscaCliente" text="Buscar" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2">
                 <GridPane.margin>
                     <Insets left="8.0" />
                 </GridPane.margin></Button>
