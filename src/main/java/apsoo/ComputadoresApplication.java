@@ -49,7 +49,7 @@ public class ComputadoresApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf("14785467978");
+		pessoa.setCpf("44785467978");
 		pessoa.setNome("Fulano de Tal");
 		pessoa.setEndereco("UFMS");
 		pessoa.setTelefone("6799999999");
@@ -90,14 +90,65 @@ public class ComputadoresApplication implements CommandLineRunner {
 		vendaDao.save(venda);
 
 		Computador computador = new Computador();
-		computador.setSo("Windows");
-		computador.setArmazenamento("250gb");
-		computador.setModelo("Intel");
-		computador.setProcessador("AMD");
-		computador.setValor(3000.0);
-		computador.setMemoria("8 RAM");
+		computador.setSo("Windows 11");
+		computador.setArmazenamento("2TB");
+		computador.setModelo("Desktop");
+		computador.setProcessador("Intel i5 13600k");
+		computador.setValor(7600.00);
+		computador.setMemoria("32gb RAM");
 
 		computadorDao.save(computador);
+
+		Computador computador2 = new Computador();
+		computador2.setSo("Windows 11");
+		computador2.setArmazenamento("256gb");
+		computador2.setModelo("Notebook");
+		computador2.setProcessador("Intel i7 11Th");
+        computador2.setValor(9600.00);
+        computador2.setMemoria("16GB RAM");
+
+        computadorDao.save(computador2);
+
+		Computador computador3 = new Computador();
+		computador3.setSo("Ubuntu");
+		computador3.setArmazenamento("500GB");
+		computador3.setModelo("Notebook");
+		computador3.setProcessador("Intel i5 11Th");
+		computador3.setValor(6600.00);
+		computador3.setMemoria("8GB RAM");
+
+
+		computadorDao.save(computador3);
+
+		Computador computador4 = new Computador();
+		computador4.setSo("Windows 11");
+		computador4.setArmazenamento("500GB");
+		computador4.setModelo("Desktop");
+		computador4.setProcessador("Amd Ryzen 7 7700x");
+		computador4.setValor(10500.00);
+		computador4.setMemoria("64GB RAM");
+
+		computadorDao.save(computador4);
+
+		Computador computador5 = new Computador();
+		computador5.setSo("Windows 10");
+		computador5.setArmazenamento("500GB");
+		computador5.setModelo("Desktop");
+		computador5.setProcessador("Amd Ryzen 5600x");
+		computador5.setValor(4600.0);
+		computador5.setMemoria("16GB RAM");
+
+		computadorDao.save(computador5);
+
+		Computador computador6 = new Computador();
+		computador6.setSo("Windows 11");
+		computador6.setArmazenamento("2TB");
+		computador6.setModelo("Desktop");
+		computador6.setProcessador("Intel i9 13600k");
+		computador6.setValor(26000.00);
+		computador6.setMemoria("128GB RAM");
+
+		computadorDao.save(computador6);
 
 		ItemVenda itemVenda = ItemVenda.criaItem();
 		itemVenda.setVenda(venda);
