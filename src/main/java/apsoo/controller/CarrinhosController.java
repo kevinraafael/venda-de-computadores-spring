@@ -3,12 +3,18 @@ package apsoo.controller;
 
 import apsoo.AplicacaoJavaFx;
 import apsoo.AplicacaoSpring;
+import apsoo.dao.ClienteDao;
+import apsoo.dao.ComputadorDao;
+import apsoo.dao.PessoaDao;
+import apsoo.entity.Computador;
+import apsoo.entity.Pessoa;
 import apsoo.service.PessoaService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,6 +28,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 import net.rgielen.fxweaver.core.FxmlView;
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 @Component
 @FxmlView("compras.fxml")
@@ -40,8 +51,6 @@ public class CarrinhosController {
     private Label nomeEncontrado;
     @FXML
     private Label nomeCliente = new Label();
-
-
     @FXML
     private GridPane listaComputador;
 
@@ -55,6 +64,14 @@ public class CarrinhosController {
     private VBox viewFinalizaVenda;
 
     private final int numColunasLista = 3;
+
+    @Autowired
+    ComputadorDao computadorDao;
+
+    @Autowired
+    ClienteDao clientDao;
+    @Autowired
+    PessoaDao pessoaDao;
 
     public CarrinhosController() {
     }
@@ -80,9 +97,81 @@ public class CarrinhosController {
 
     }
 
+
     @FXML
     public void btnFinalizaVenda(ActionEvent e) {
+        List<Computador> computadores = computadorDao.findAll();
+        System.out.println(computadores.get(0).getModelo());
         carregarScene(viewFinalizaVenda, FinalizaVenda.class);
+    }
+
+    @FXML
+    public void buscaCliente(ActionEvent e) {
+
+        try {
+            String cpf = cpfCliente.getText().toString();
+            //  retornar uma  lista de pessoa
+            // e como cpf é unico logo estará  sempre na primeira na primeira posição da lista
+            List<Pessoa> pessoa = pessoaDao.findByCpf(cpf);
+            String nomeEncontrado = pessoa.get(0).getNome();
+            nomeCliente.setText(nomeEncontrado);
+        } catch (Exception error) {
+            informationDialog(e, "Cliente não encontrado", "Por favor faça o cadastro do cliente",
+                    "É" + " necessário cliente estar cadastrado para iniciar a venda ");
+        }
+
+
+        carregaListaComputadores();
+
+    }
+
+    public void carregaListaComputadores() {
+        try {
+
+
+            List<Computador> computadores = computadorDao.findAll();
+
+
+            for (int rowIndex = 0; rowIndex < 2; rowIndex++) {
+                for (int collIndex = 0; collIndex < numColunasLista; collIndex++) {
+                    int pcCollumns = (int) Math.floor((double) computadores.size() / numColunasLista);
+                    int pcIndex = (rowIndex * pcCollumns) + collIndex;
+                    if (pcIndex == computadores.size() - 1) {
+                        String pcTitle = computadores.get(pcIndex).getModelo() + " "
+                                + computadores.get(pcIndex).getProcessador();
+                        String pcValor = computadores.get(pcIndex).getValor().toString();
+
+                        listaComputador.add(
+                                new ComputadorComponent("/assets/PC.jpg", pcTitle, pcValor,
+                                        totalCarrinho, totalQntCarrinho),
+                                collIndex, rowIndex);
+                        return;
+                    } else {
+                        String pcTitle = computadores.get(pcIndex).getModelo() + " "
+                                + computadores.get(pcIndex).getProcessador();
+                        String pcValor = computadores.get(pcIndex).getValor().toString();
+
+                        listaComputador.add(
+                                new ComputadorComponent("/apsoo/controller/assets/PC.jpg", pcTitle, pcValor,
+                                        totalCarrinho, totalQntCarrinho),
+                                collIndex, rowIndex);
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            // throw e;
+        }
+
+    }
+
+    public void informationDialog(ActionEvent event, String title, String headerText, String bottomText) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(bottomText);
+        alert.showAndWait();
     }
 
 }
