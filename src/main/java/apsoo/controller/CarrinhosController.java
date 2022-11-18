@@ -2,13 +2,14 @@ package apsoo.controller;
 
 
 import apsoo.AplicacaoJavaFx;
-import apsoo.AplicacaoSpring;
 import apsoo.dao.ClienteDao;
 import apsoo.dao.ComputadorDao;
+import apsoo.dao.FuncionarioDao;
 import apsoo.dao.PessoaDao;
+import apsoo.entity.Cliente;
 import apsoo.entity.Computador;
+import apsoo.entity.Funcionario;
 import apsoo.entity.Pessoa;
-import apsoo.service.PessoaService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,20 +20,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 import net.rgielen.fxweaver.core.FxmlView;
-import javafx.fxml.Initializable;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @FxmlView("compras.fxml")
@@ -65,6 +62,8 @@ public class CarrinhosController {
 
     private final int numColunasLista = 3;
 
+    static Cliente cliente = new Cliente();
+    static Optional<Funcionario> funcionario = Optional.of(new Funcionario());
     @Autowired
     ComputadorDao computadorDao;
 
@@ -73,6 +72,8 @@ public class CarrinhosController {
     @Autowired
     PessoaDao pessoaDao;
 
+    @Autowired
+    FuncionarioDao funcionarioDao;
     public CarrinhosController() {
     }
 
@@ -113,8 +114,17 @@ public class CarrinhosController {
             //  retornar uma  lista de pessoa
             // e como cpf é unico logo estará  sempre na primeira na primeira posição da lista
             List<Pessoa> pessoa = pessoaDao.findByCpf(cpf);
-            String nomeEncontrado = pessoa.get(0).getNome();
+            List<Cliente> clientes = clientDao.findByPessoa_Id(pessoa.get(0).getId());
+            //Verifico se a pessoa já é um cliente
+            cliente = clientes.get(0);
+            System.out.println(cliente.getPessoa().getNome());
+
+
+            Pessoa pessoaEncontrada = clientes.get(0).getPessoa();
+            String nomeEncontrado = pessoaEncontrada.getNome();
             nomeCliente.setText(nomeEncontrado);
+
+
         } catch (Exception error) {
             informationDialog(e, "Cliente não encontrado", "Por favor faça o cadastro do cliente",
                     "É" + " necessário cliente estar cadastrado para iniciar a venda ");
@@ -173,5 +183,6 @@ public class CarrinhosController {
         alert.setContentText(bottomText);
         alert.showAndWait();
     }
+
 
 }
