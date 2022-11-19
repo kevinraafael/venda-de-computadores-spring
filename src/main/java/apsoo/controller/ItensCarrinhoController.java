@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-@FxmlView("compras.fxml")
-public class CarrinhosController {
+@FxmlView("itensCarrinho.fxml")
+public class ItensCarrinhoController {
 
     @FXML
     private Button finalizaVenda;
@@ -56,10 +56,7 @@ public class CarrinhosController {
     @FXML
     private VBox viewFinalizaVenda;
 
-    private final int numColunasLista = 3;
 
-    public static Cliente cliente = new Cliente();
-    public static Funcionario funcionario = new Funcionario();
     @Autowired
     public ComputadorDao computadorDao;
 
@@ -78,8 +75,12 @@ public class CarrinhosController {
     public VendaDao vendaDao;
 
     private Random numeroAleatorio;
+    private final int numColunasLista = 3;
 
-    public CarrinhosController() {
+    public static Cliente cliente = new Cliente();
+    public static Funcionario funcionario = new Funcionario();
+    public  static String valorTotal;
+    public ItensCarrinhoController() {
     }
 
     public void carregarScene(Node parent, Class controller) {
@@ -204,11 +205,13 @@ public class CarrinhosController {
 
     public void iniciaVenda() {
         pagamentoDao.save(PagamentoController.pagamento);
-        VendaController.venda.setCliente(CarrinhosController.cliente);
+        VendaController.venda.setCliente(ItensCarrinhoController.cliente);
         VendaController.venda.setCodigo(99);
-        VendaController.venda.setFuncionario(CarrinhosController.funcionario);
+        VendaController.venda.setFuncionario(ItensCarrinhoController.funcionario);
         VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
         VendaController.venda.setValor(Double.valueOf(PagamentoController.pagamento.getValorTotal()));
+         valorTotal =String.valueOf(PagamentoController.pagamento.getValorTotal());
+      //  FinalizaVenda.valorTotal.setText(valorTotal);
         vendaDao.save(VendaController.venda);
     }
 

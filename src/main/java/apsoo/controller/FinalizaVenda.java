@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -19,6 +21,12 @@ import org.springframework.stereotype.Component;
 public class FinalizaVenda {
     @FXML
     Pane paneFinalizaVenda;
+
+    @FXML
+    public   Label valorTotal ;
+    @FXML
+    public Button atualiza;
+
     public FinalizaVenda() {
     }
 
@@ -31,8 +39,6 @@ public class FinalizaVenda {
         alert.setContentText("Pagamento á vista em dinheiro");
         alert.showAndWait();
     }
-
-
 
     public void carregarScene(Node parent, Class controller) {
 
@@ -57,6 +63,12 @@ public class FinalizaVenda {
 
     @FXML
     public void btnFinalizaVenda(ActionEvent e) {
-        carregarScene(paneFinalizaVenda, CarrinhosController.class);
+        carregarScene(paneFinalizaVenda, ItensCarrinhoController.class);
+    }
+
+    @FXML
+    public void atualizaLayout(){
+        String valorTotal2 = ItensCarrinhoController.valorTotal;
+        valorTotal.setText(valorTotal2);
     }
 }

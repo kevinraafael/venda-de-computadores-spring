@@ -16,7 +16,7 @@
          <Font name="Arial Black" size="36.0" />
       </font>
    </Label>
-   <Label layoutX="258.0" layoutY="395.0" text="8,789.00">
+   <Label fx:id="valorTotal" layoutX="258.0" layoutY="395.0">
       <font>
          <Font name="Arial" size="36.0" />
       </font>
@@ -34,4 +34,5 @@
    <RadioButton layoutX="465.0" layoutY="438.0" mnemonicParsing="false" text="Crédito" />
    <RadioButton layoutX="465.0" layoutY="464.0" mnemonicParsing="false" text="Débito" />
    <Pane prefHeight="200.0" prefWidth="200.0" />
+   <Button fx:id="atualiza" layoutX="439.0" layoutY="41.0" mnemonicParsing="false" onAction="#atualizaLayout" text="Atualizar" />
 </Pane>
