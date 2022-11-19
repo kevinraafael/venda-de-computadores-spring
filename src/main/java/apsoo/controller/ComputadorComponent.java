@@ -1,8 +1,8 @@
 package apsoo.controller;
 
 
-
-import apsoo.entity.Venda;
+import apsoo.dao.PagamentoDao;
+import apsoo.entity.Pagamento;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
 
 public class ComputadorComponent extends VBox {
 
@@ -23,6 +24,10 @@ public class ComputadorComponent extends VBox {
     private Image imagem;
 
     private Button adicionarCarrinho;
+
+
+
+
 
     public ComputadorComponent(String imageUrl, String titulo, String valor, Label total, Label quantidade) {
         super();
@@ -61,6 +66,30 @@ public class ComputadorComponent extends VBox {
         total.setText(novoTotal);
         int valorItensCarrinho = Integer.parseInt(quantidade.getText()) + 1;
         quantidade.setText(Integer.toString(valorItensCarrinho));
+
+        try{
+            PagamentoController.pagamento.setTipoPagamento("pix");
+            PagamentoController.pagamento.setValorTotal(Double.valueOf(novoTotal));
+            PagamentoController.pagamento.setParcelamento(0);
+            PagamentoController.pagamento.setDesconto(0.0);
+            Pagamento pag = new Pagamento();
+            pag =PagamentoController.pagamento;
+            //pagamentoDao.save(pag);
+
+//            VendaController.venda.setCliente(CarrinhosController.cliente);
+//            VendaController.venda.setCodigo(numeroAleatorio.nextInt());
+//
+//            VendaController.venda.setFuncionario(CarrinhosController.funcionario);
+//            VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
+//            VendaController.venda.setValor(Double.valueOf(novoTotal));
+//            VendaController.vendaDao.save(VendaController.venda);
+        }catch (Error e){
+            System.out.println(e);
+        }
+
+//		venda.setFormaPagemnto(pag);
+//		venda.setValor(100.75);
+//		vendaDao.save(venda);
 
 
     }

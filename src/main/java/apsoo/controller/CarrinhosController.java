@@ -2,10 +2,7 @@ package apsoo.controller;
 
 
 import apsoo.AplicacaoJavaFx;
-import apsoo.dao.ClienteDao;
-import apsoo.dao.ComputadorDao;
-import apsoo.dao.FuncionarioDao;
-import apsoo.dao.PessoaDao;
+import apsoo.dao.*;
 import apsoo.entity.Cliente;
 import apsoo.entity.Computador;
 import apsoo.entity.Funcionario;
@@ -23,13 +20,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
+import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import net.rgielen.fxweaver.core.FxmlView;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.Random;
 
 @Component
 @FxmlView("compras.fxml")
@@ -62,18 +58,27 @@ public class CarrinhosController {
 
     private final int numColunasLista = 3;
 
-    static Cliente cliente = new Cliente();
-    static Optional<Funcionario> funcionario = Optional.of(new Funcionario());
+    public static Cliente cliente = new Cliente();
+    public static Funcionario funcionario = new Funcionario();
     @Autowired
-    ComputadorDao computadorDao;
+    public ComputadorDao computadorDao;
 
     @Autowired
-    ClienteDao clientDao;
+    public ClienteDao clientDao;
     @Autowired
-    PessoaDao pessoaDao;
+    public PessoaDao pessoaDao;
 
     @Autowired
-    FuncionarioDao funcionarioDao;
+    public FuncionarioDao funcionarioDao;
+
+    @Autowired
+    public PagamentoDao pagamentoDao;
+
+    @Autowired
+    public VendaDao vendaDao;
+
+    private Random numeroAleatorio;
+
     public CarrinhosController() {
     }
 
@@ -101,9 +106,18 @@ public class CarrinhosController {
 
     @FXML
     public void btnFinalizaVenda(ActionEvent e) {
-        List<Computador> computadores = computadorDao.findAll();
-        System.out.println(computadores.get(0).getModelo());
-        carregarScene(viewFinalizaVenda, FinalizaVenda.class);
+
+        //int codigo = numeroAleatorio.nextInt(99);
+        try {
+            iniciaVenda();
+        } catch (Error error
+        ) {
+            System.out.println(e);
+        } finally {
+            carregarScene(viewFinalizaVenda, FinalizaVenda.class);
+        }
+
+
     }
 
     @FXML
@@ -114,9 +128,13 @@ public class CarrinhosController {
             //  retornar uma  lista de pessoa
             // e como cpf é unico logo estará  sempre na primeira na primeira posição da lista
             List<Pessoa> pessoa = pessoaDao.findByCpf(cpf);
+            List<Pessoa> pessoaFuncionario = pessoaDao.findByCpf("14317576082");
             List<Cliente> clientes = clientDao.findByPessoa_Id(pessoa.get(0).getId());
+            List<Funcionario> funcionarios = funcionarioDao.findByPessoa_Id(pessoaFuncionario.get(0).getId());
+            System.out.println(funcionarios.get(0).getData_contratacao());
             //Verifico se a pessoa já é um cliente
             cliente = clientes.get(0);
+            funcionario = funcionarios.get(0);
             System.out.println(cliente.getPessoa().getNome());
 
 
@@ -182,6 +200,16 @@ public class CarrinhosController {
         alert.setHeaderText(headerText);
         alert.setContentText(bottomText);
         alert.showAndWait();
+    }
+
+    public void iniciaVenda() {
+        pagamentoDao.save(PagamentoController.pagamento);
+        VendaController.venda.setCliente(CarrinhosController.cliente);
+        VendaController.venda.setCodigo(99);
+        VendaController.venda.setFuncionario(CarrinhosController.funcionario);
+        VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
+        VendaController.venda.setValor(Double.valueOf(PagamentoController.pagamento.getValorTotal()));
+        vendaDao.save(VendaController.venda);
     }
 
 

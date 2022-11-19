@@ -49,12 +49,13 @@
 //	public void run(String... args) throws Exception {
 //
 //		Pessoa pessoa = new Pessoa();
-//		pessoa.setCpf("44785467978");
-//		pessoa.setNome("Fulano de Tal");
-//		pessoa.setEndereco("UFMS");
-//		pessoa.setTelefone("6799999999");
+//		pessoa.setCpf("14317576082");
+//		pessoa.setNome("Carlos");
+//		pessoa.setEndereco("Nova Campo Grande");
+//		pessoa.setTelefone("991318961");
 //
 //		pessoaRepository.save(pessoa);
+//
 //
 //		Funcionario funcionario = new Funcionario();
 //		funcionario.setComissao(17.6);
@@ -64,10 +65,15 @@
 //		funcionario.setData_contratacao(new Date(12));
 //		funcionarioDao.save(funcionario);
 //
-//
+//        Pessoa pessoa2 = new Pessoa();
+//        pessoa2.setCpf("00725766000");
+//        pessoa2.setNome("Kevin");
+//        pessoa2.setEndereco("Monte Castelo");
+//        pessoa2.setTelefone("992152185");
+//        pessoaRepository.save(pessoa2);
 //
 //		Cliente cliente = new Cliente();
-//		cliente.setPessoa(pessoa);
+//		cliente.setPessoa(pessoa2);
 //		clienteRepository.save(cliente);
 //
 //
