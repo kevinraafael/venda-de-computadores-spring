@@ -3,10 +3,7 @@ package apsoo.controller;
 
 import apsoo.AplicacaoJavaFx;
 import apsoo.dao.*;
-import apsoo.entity.Cliente;
-import apsoo.entity.Computador;
-import apsoo.entity.Funcionario;
-import apsoo.entity.Pessoa;
+import apsoo.entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -74,12 +71,16 @@ public class ItensCarrinhoController {
     @Autowired
     public VendaDao vendaDao;
 
+    @Autowired
+    public ItemVendaDao itemVendaDao;
+
     private Random numeroAleatorio;
     private final int numColunasLista = 3;
 
     public static Cliente cliente = new Cliente();
     public static Funcionario funcionario = new Funcionario();
-    public  static String valorTotal;
+    public static String valorTotal;
+
     public ItensCarrinhoController() {
     }
 
@@ -172,7 +173,7 @@ public class ItensCarrinhoController {
 
                         listaComputador.add(
                                 new ComputadorComponent("/assets/PC.jpg", pcTitle, pcValor,
-                                        totalCarrinho, totalQntCarrinho),
+                                        totalCarrinho, totalQntCarrinho, computadores.get(pcIndex)),
                                 collIndex, rowIndex);
                         return;
                     } else {
@@ -182,7 +183,7 @@ public class ItensCarrinhoController {
 
                         listaComputador.add(
                                 new ComputadorComponent("/apsoo/controller/assets/PC.jpg", pcTitle, pcValor,
-                                        totalCarrinho, totalQntCarrinho),
+                                        totalCarrinho, totalQntCarrinho, computadores.get(pcIndex)),
                                 collIndex, rowIndex);
                     }
 
@@ -204,15 +205,31 @@ public class ItensCarrinhoController {
     }
 
     public void iniciaVenda() {
-        pagamentoDao.save(PagamentoController.pagamento);
-        VendaController.venda.setCliente(ItensCarrinhoController.cliente);
-        VendaController.venda.setCodigo(99);
-        VendaController.venda.setFuncionario(ItensCarrinhoController.funcionario);
-        VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
-        VendaController.venda.setValor(Double.valueOf(PagamentoController.pagamento.getValorTotal()));
-         valorTotal =String.valueOf(PagamentoController.pagamento.getValorTotal());
-      //  FinalizaVenda.valorTotal.setText(valorTotal);
-        vendaDao.save(VendaController.venda);
+        try{
+
+            pagamentoDao.save(PagamentoController.pagamento);
+            VendaController.venda.setCliente(ItensCarrinhoController.cliente);
+            VendaController.venda.setCodigo(99);
+            VendaController.venda.setFuncionario(ItensCarrinhoController.funcionario);
+            VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
+            VendaController.venda.setValor(Double.valueOf(PagamentoController.pagamento.getValorTotal()));
+            valorTotal = String.valueOf(PagamentoController.pagamento.getValorTotal());
+            //  FinalizaVenda.valorTotal.setText(valorTotal);
+            vendaDao.save(VendaController.venda);
+//            VendaController.itemVenda.setVenda(VendaController.venda);
+            //itemVendaDao.save(VendaController.itemVenda);
+            salvaItensVenda();
+        }catch (Exception e){
+           System.out.println(e);
+        }
+    }
+    public void salvaItensVenda(){
+
+        for(int i= 0;i<VendaController.itemVendaList.size();i++){
+            VendaController.itemVendaList.get(i).setVenda(VendaController.venda);
+            itemVendaDao.save( VendaController.itemVendaList.get(i));
+
+        }
     }
 
 

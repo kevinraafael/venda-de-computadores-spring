@@ -1,8 +1,9 @@
 package apsoo.controller;
 
 
-import apsoo.dao.PagamentoDao;
-import apsoo.entity.Pagamento;
+import apsoo.entity.Computador;
+import apsoo.entity.ItemVenda;
+import apsoo.entity.Venda;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -11,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ComputadorComponent extends VBox {
@@ -25,11 +29,12 @@ public class ComputadorComponent extends VBox {
 
     private Button adicionarCarrinho;
 
+    private Computador computador;
+
+    private List<ItemVenda> itemVendaList = new ArrayList<ItemVenda>();
 
 
-
-
-    public ComputadorComponent(String imageUrl, String titulo, String valor, Label total, Label quantidade) {
+    public ComputadorComponent(String imageUrl, String titulo, String valor, Label total, Label quantidade, Computador computador) {
         super();
         // Set image
         this.imagem = new Image(getClass().getResource(imageUrl).toExternalForm());
@@ -57,6 +62,7 @@ public class ComputadorComponent extends VBox {
 
         this.setSpacing(5);
         this.setAlignment(Pos.CENTER);
+        this.computador = computador;
     }
 
     public void adicionarNoCarrinho(Label total, Label quantidade) {
@@ -67,29 +73,32 @@ public class ComputadorComponent extends VBox {
         int valorItensCarrinho = Integer.parseInt(quantidade.getText()) + 1;
         quantidade.setText(Integer.toString(valorItensCarrinho));
 
-        try{
+        try {
             PagamentoController.pagamento.setTipoPagamento("pix");
             PagamentoController.pagamento.setValorTotal(Double.valueOf(novoTotal));
             PagamentoController.pagamento.setParcelamento(0);
             PagamentoController.pagamento.setDesconto(0.0);
-            Pagamento pag = new Pagamento();
-            pag =PagamentoController.pagamento;
-            //pagamentoDao.save(pag);
 
-//            VendaController.venda.setCliente(CarrinhosController.cliente);
-//            VendaController.venda.setCodigo(numeroAleatorio.nextInt());
-//
-//            VendaController.venda.setFuncionario(CarrinhosController.funcionario);
-//            VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
-//            VendaController.venda.setValor(Double.valueOf(novoTotal));
-//            VendaController.vendaDao.save(VendaController.venda);
-        }catch (Error e){
+            ItemVenda itemVenda = new ItemVenda();
+            // Setando os valores do item venda
+//            VendaController.itemVenda.setQtdVendida(valorItensCarrinho);
+//            VendaController.itemVenda.setValorVendido(valor);
+//            VendaController.itemVenda.setComputador(computador);
+            itemVenda.setQtdVendida(1);
+            itemVenda.setValorVendido(valor);
+            itemVenda.setComputador(computador);
+            //Adicionando item Venda nalista
+            if(itemVendaList!=null){
+
+                VendaController.itemVendaList.add(itemVenda);
+            }
+
+            //Adicionando a lista de itens venda em venda
+            VendaController.venda.setItemVendas(itemVendaList);
+
+        } catch (Error e) {
             System.out.println(e);
         }
-
-//		venda.setFormaPagemnto(pag);
-//		venda.setValor(100.75);
-//		vendaDao.save(venda);
 
 
     }
