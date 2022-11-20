@@ -2,6 +2,8 @@ package apsoo.controller;
 
 
 import apsoo.AplicacaoJavaFx;
+import apsoo.dao.PagamentoDao;
+import apsoo.dao.VendaDao;
 import apsoo.entity.ItemVenda;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,10 +16,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @FxmlView("finalizaVenda.fxml")
@@ -32,11 +32,24 @@ public class FinalizaVendaController {
     @FXML
     public RadioButton radioButtonPix;
     @FXML
+    public RadioButton radioButtonCredito;
+    @FXML
+    public RadioButton radioButtonDebito;
+    @FXML
+    public RadioButton radioButtonDinheiro;
+    @FXML
     private ListView<String> listViewItemVenda;
     @FXML
     private Label totalItensCarrinho;
 
+    @Autowired
+    public PagamentoDao pagamentoDao;
 
+    @Autowired
+    public VendaDao vendaDao;
+
+
+    private Double desconto = 0.0;
 
     private ObservableList<ItemVenda> obsListItensVenda;
 
@@ -45,11 +58,11 @@ public class FinalizaVendaController {
 
 
     @FXML
-    protected void informationDialogVenda(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Sucesso!");
-        alert.setHeaderText("Venda concluída com SUCESSO!");
-        alert.setContentText("Aproveite seu novo produto");
+    public void informationDialog(ActionEvent event, String title, String headerText, String bottomText) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(bottomText);
         alert.showAndWait();
     }
 
@@ -76,19 +89,28 @@ public class FinalizaVendaController {
 
     @FXML
     public void btnFinalizaVenda(ActionEvent e) {
-      informationDialogVenda(e);
+        try{
+            realizaVenda();
+        }catch (Exception error){
+            informationDialog(e,"Ocorreu um problema ao finalizar a venda","iremos corrigir",
+                    "Por favor aguarde");
+        }finally {
+            informationDialog(e,"Venda realizada com sucesso","Venda Realizada",
+                    "Caso tenha problema, procure realizar devolução");
+        }
+
     }
 
     @FXML
     public void atualizaLayout() {
 
         String valorTotalString = ItensCarrinhoController.valorTotal;
-        valorTotal.setText( Double.toString(descontoPix(valorTotalString)));
-        if(this.listViewItemVenda.getItems().isEmpty()){
+        valorTotal.setText(Double.toString(verificaFormaDePagamento(valorTotalString)));
+        if (this.listViewItemVenda.getItems().isEmpty()) {
             carregaLista();
         }
         int totalItensInt = VendaController.itemVendaList.size();
-        String totalItens = String.valueOf( totalItensInt);
+        String totalItens = String.valueOf(totalItensInt);
         totalItensCarrinho.setText(totalItens);
 
     }
@@ -101,14 +123,47 @@ public class FinalizaVendaController {
 
     }
 
-    public double descontoPix(String valorTotal) {
+    public double verificaFormaDePagamento(String valorTotal) {
         double valorTotalDouble = Double.parseDouble(ItensCarrinhoController.valorTotal);
         if (radioButtonPix.isSelected()) {
-            double desconto =valorTotalDouble * 0.1;
-            valorTotalDouble =valorTotalDouble -desconto;
+            this.desconto = valorTotalDouble * 0.1;
+            valorTotalDouble = valorTotalDouble - desconto;
+            PagamentoController.pagamento.setDesconto(desconto);
+            PagamentoController.pagamento.setValorTotal(valorTotalDouble);
+            PagamentoController.pagamento.setTipoPagamento("PIX");
+        } else if (radioButtonCredito.isSelected()) {
+            PagamentoController.pagamento.setDesconto(0.0);
+            PagamentoController.pagamento.setValorTotal(valorTotalDouble);
+            PagamentoController.pagamento.setTipoPagamento("Credito");
+        } else if (radioButtonDebito.isSelected()) {
+            PagamentoController.pagamento.setDesconto(0.0);
+            PagamentoController.pagamento.setValorTotal(valorTotalDouble);
+            PagamentoController.pagamento.setTipoPagamento("Debito");
+        } else if (radioButtonDinheiro.isSelected()) {
+            PagamentoController.pagamento.setDesconto(0.0);
+            PagamentoController.pagamento.setValorTotal(valorTotalDouble);
+            PagamentoController.pagamento.setTipoPagamento("Dinheiro");
         }
         return valorTotalDouble;
 
+    }
+
+    public void realizaVenda() {
+        try {
+
+            pagamentoDao.save(PagamentoController.pagamento);
+                VendaController.venda.setCliente(ItensCarrinhoController.cliente);
+                VendaController.venda.setCodigo(99);
+                VendaController.venda.setFuncionario(ItensCarrinhoController.funcionario);
+            VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
+            VendaController.venda.setValor(Double.valueOf(PagamentoController.pagamento.getValorTotal()));
+            VendaController.venda.setItemVendas(VendaController.itemVendaList);
+            vendaDao.save(VendaController.venda);
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 
