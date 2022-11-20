@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="viewFinalizaVenda" minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.ItensCarrinhoController">
+<VBox fx:id="viewAtual" minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.ItensCarrinhoController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -93,7 +93,8 @@
                     <Insets left="5.0" />
                 </padding>
             </Label>
-            <Button fx:id="finalizaVenda" mnemonicParsing="false" onAction="#btnFinalizaVenda" prefHeight="30.0" prefWidth="277.0" text="Ir para o carrinho" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="finalizaVenda" mnemonicParsing="false" onAction="#btnVaiParaFinalizaVenda" prefHeight="30.0" prefWidth="277.0" text="Ir para o Carrinho" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+         <Button fx:id="buttonDevolucao" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnVaiParaDevolucao" prefHeight="25.0" prefWidth="279.0" text="Ir para Devolução" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         </children>
     </GridPane>
 </VBox>

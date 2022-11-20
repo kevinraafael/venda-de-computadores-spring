@@ -51,7 +51,10 @@ public class ItensCarrinhoController {
     private Label totalQntCarrinho;
 
     @FXML
-    private VBox viewFinalizaVenda;
+     VBox viewAtual;
+
+    @FXML
+    private Button buttonDevolucao;
 
 
     @Autowired
@@ -107,7 +110,7 @@ public class ItensCarrinhoController {
 
 
     @FXML
-    public void btnFinalizaVenda(ActionEvent e) {
+    public void btnVaiParaFinalizaVenda(ActionEvent e) {
 
         //int codigo = numeroAleatorio.nextInt(99);
         try {
@@ -116,10 +119,13 @@ public class ItensCarrinhoController {
         ) {
             System.out.println(e);
         } finally {
-            carregarScene(viewFinalizaVenda, FinalizaVendaController.class);
+            carregarScene(viewAtual, FinalizaVendaController.class);
         }
 
 
+    }
+    public void btnVaiParaDevolucao(ActionEvent e){
+        carregarScene(viewAtual, RealizaDevolucaoController.class);
     }
 
     @FXML
