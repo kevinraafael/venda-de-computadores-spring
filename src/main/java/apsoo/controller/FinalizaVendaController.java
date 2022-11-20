@@ -5,6 +5,7 @@ import apsoo.AplicacaoJavaFx;
 import apsoo.dao.PagamentoDao;
 import apsoo.dao.VendaDao;
 import apsoo.entity.ItemVenda;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class FinalizaVendaController {
     @FXML
     public RadioButton radioButtonDinheiro;
     @FXML
-    private ListView<String> listViewItemVenda;
+    private ListView<String> listViewItemVenda ;
     @FXML
     private Label totalItensCarrinho;
 
@@ -89,13 +90,14 @@ public class FinalizaVendaController {
 
     @FXML
     public void btnFinalizaVenda(ActionEvent e) {
-        try{
+        try {
+            verificaFormaDePagamento(ItensCarrinhoController.valorTotal);
             realizaVenda();
-        }catch (Exception error){
-            informationDialog(e,"Ocorreu um problema ao finalizar a venda","iremos corrigir",
+        } catch (Exception error) {
+            informationDialog(e, "Ocorreu um problema ao finalizar a venda", "iremos corrigir",
                     "Por favor aguarde");
-        }finally {
-            informationDialog(e,"Venda realizada com sucesso","Venda Realizada",
+        } finally {
+            informationDialog(e, "Venda realizada com sucesso", "Venda Realizada",
                     "Caso tenha problema, procure realizar devolução");
         }
 
@@ -152,9 +154,9 @@ public class FinalizaVendaController {
         try {
 
             pagamentoDao.save(PagamentoController.pagamento);
-                VendaController.venda.setCliente(ItensCarrinhoController.cliente);
-                VendaController.venda.setCodigo(99);
-                VendaController.venda.setFuncionario(ItensCarrinhoController.funcionario);
+            VendaController.venda.setCliente(ItensCarrinhoController.cliente);
+            VendaController.venda.setCodigo(99);
+            VendaController.venda.setFuncionario(ItensCarrinhoController.funcionario);
             VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
             VendaController.venda.setValor(Double.valueOf(PagamentoController.pagamento.getValorTotal()));
             VendaController.venda.setItemVendas(VendaController.itemVendaList);
@@ -165,6 +167,8 @@ public class FinalizaVendaController {
             System.out.println(e);
         }
     }
+
+
 
 
 }
