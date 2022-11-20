@@ -46,4 +46,11 @@ public class Venda {
     public void setValor(Double valor) {
         this.valor = valor;
     }
+
+    @Override
+    public String toString() {
+        String vendaInfo = "Código da Venda: " + getCodigo() + " Valor: R$ " + getValor() + "\n"+
+                "\n";
+        return vendaInfo;
+    }
 }
