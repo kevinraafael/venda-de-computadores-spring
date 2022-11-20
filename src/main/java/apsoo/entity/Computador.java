@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name="computador")
+@Table(name = "computador")
 public class Computador {
 
     @Id
@@ -31,5 +31,12 @@ public class Computador {
 
     private Double valor;
 
+    @Override
+    public String toString() {
+        String computadorInfo = "Modelo: " + getModelo() + "/n" + "Processador: " + getProcessador() + "\n"
+                + "Memória: " + getMemoria() + "Armazenamento: " + getArmazenamento() + " SO: " + getSo()+
+                " Valor: R$ "+getValor() +"\n";
+        return computadorInfo;
+    }
 
 }

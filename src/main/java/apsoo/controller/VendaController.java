@@ -13,7 +13,8 @@ import java.util.List;
 public class VendaController {
    public static Venda venda = new Venda();
    public static ItemVenda itemVenda = new ItemVenda();
-
    public static List<ItemVenda> itemVendaList = new ArrayList<ItemVenda>();
+
+
 
 }

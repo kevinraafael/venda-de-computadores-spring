@@ -116,7 +116,7 @@ public class ItensCarrinhoController {
         ) {
             System.out.println(e);
         } finally {
-            carregarScene(viewFinalizaVenda, FinalizaVenda.class);
+            carregarScene(viewFinalizaVenda, FinalizaVendaController.class);
         }
 
 
@@ -214,10 +214,7 @@ public class ItensCarrinhoController {
             VendaController.venda.setFormaPagemnto(PagamentoController.pagamento);
             VendaController.venda.setValor(Double.valueOf(PagamentoController.pagamento.getValorTotal()));
             valorTotal = String.valueOf(PagamentoController.pagamento.getValorTotal());
-            //  FinalizaVenda.valorTotal.setText(valorTotal);
             vendaDao.save(VendaController.venda);
-//            VendaController.itemVenda.setVenda(VendaController.venda);
-            //itemVendaDao.save(VendaController.itemVenda);
             salvaItensVenda();
         }catch (Exception e){
            System.out.println(e);

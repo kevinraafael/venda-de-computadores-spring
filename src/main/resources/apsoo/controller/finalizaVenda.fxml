@@ -9,8 +9,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="paneFinalizaVenda" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.FinalizaVenda">
-   <ListView layoutX="88.0" layoutY="85.0" prefHeight="200.0" prefWidth="420.0" />
+<Pane fx:id="paneFinalizaVenda" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.FinalizaVendaController">
+   <ListView fx:id="listViewItemVenda" layoutX="88.0" layoutY="85.0" prefHeight="200.0" prefWidth="420.0" />
    <Label layoutX="67.0" layoutY="387.0" prefHeight="59.0" prefWidth="216.0" text="Total: R$ " textAlignment="CENTER">
       <font>
          <Font name="Arial Black" size="36.0" />
@@ -24,15 +24,12 @@
    <Group layoutX="439.0" layoutY="372.0" />
    <Button layoutX="104.0" layoutY="515.0" mnemonicParsing="false" onAction="#btnFinalizaVenda" prefHeight="25.0" prefWidth="387.0" text="Finalizar Venda" />
    <Label layoutX="388.0" layoutY="300.0" text="Itens no carrinho:" />
-   <Label layoutX="486.0" layoutY="300.0" text="0" />
-   <RadioButton layoutX="465.0" layoutY="395.0" mnemonicParsing="false" selected="true" text="Dinheiro">
-      <toggleGroup>
-         <ToggleGroup />
-      </toggleGroup>
-   </RadioButton>
-   <RadioButton layoutX="465.0" layoutY="416.0" mnemonicParsing="false" text="Pix" />
+   <Label layoutX="486.0" layoutY="300.0" fx:id="totalItensCarrinho" />
+
+   <RadioButton fx:id="radioButtonPix" layoutX="465.0" layoutY="416.0" mnemonicParsing="false" text="Pix" />
    <RadioButton layoutX="465.0" layoutY="438.0" mnemonicParsing="false" text="Crédito" />
    <RadioButton layoutX="465.0" layoutY="464.0" mnemonicParsing="false" text="Débito" />
+   <RadioButton layoutX="465.0" layoutY="486.0" mnemonicParsing="false" text="Dinheiro" />
    <Pane prefHeight="200.0" prefWidth="200.0" />
    <Button fx:id="atualiza" layoutX="439.0" layoutY="41.0" mnemonicParsing="false" onAction="#atualizaLayout" text="Atualizar" />
 </Pane>

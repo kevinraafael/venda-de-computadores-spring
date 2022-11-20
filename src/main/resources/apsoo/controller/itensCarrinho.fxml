@@ -93,7 +93,7 @@
                     <Insets left="5.0" />
                 </padding>
             </Label>
-            <Button fx:id="finalizaVenda" mnemonicParsing="false" onAction="#btnFinalizaVenda" prefHeight="30.0" prefWidth="277.0" text="Finalizar compras" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="finalizaVenda" mnemonicParsing="false" onAction="#btnFinalizaVenda" prefHeight="30.0" prefWidth="277.0" text="Ir para o carrinho" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
         </children>
     </GridPane>
 </VBox>
