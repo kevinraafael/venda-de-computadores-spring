@@ -14,7 +14,7 @@
       <Label fx:id="nomeClienteXml" layoutX="150.0" layoutY="59.0" prefHeight="17.0" prefWidth="149.0" />
       <ListView fx:id="listViewVenda" layoutX="40.0" layoutY="116.0" prefHeight="199.0" prefWidth="323.0" />
       <ListView fx:id="listViewItemVenda" layoutX="40.0" layoutY="336.0" prefHeight="183.0" prefWidth="323.0" />
-      <Button fx:id="buttonDevolcaoXml" layoutX="260.0" layoutY="551.0" mnemonicParsing="false" onAction="#realizaDevolucao" text="Efetuar Devolução" textAlignment="CENTER" />
+      <Button fx:id="buttonDevolucao" layoutX="260.0" layoutY="551.0" mnemonicParsing="false" onAction="#realizaDevolucao" text="Efetuar Devolução" textAlignment="CENTER" />
       <Label layoutX="21.0" layoutY="88.0" text="Motivo da Devolução: " />
       <TextField fx:id="motivoDevolucaoXml" layoutX="150.0" layoutY="84.0" />
    </children>

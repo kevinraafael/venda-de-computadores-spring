@@ -31,7 +31,7 @@ public class RealizaDevolucaoController implements Initializable {
     private TextField motivoDevolucaoXml;
 
     @FXML
-    private Button buttonDevolcaoXml;
+    private Button buttonDevolucao;
 
     @FXML
     private ListView<ItemVenda> listViewItemVenda;
@@ -67,14 +67,7 @@ public class RealizaDevolucaoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        listViewItemVenda.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ItemVenda>() {
-            @Override
-            public void changed(ObservableValue<? extends ItemVenda> observable, ItemVenda oldValue, ItemVenda newValue) {
-                int indiceSelecionado = listViewItemVenda.getSelectionModel().getSelectedIndex();
-                //  itemVendaList = (List<ItemVenda>) listViewItemVenda.getSelectionModel().getSelectedItem();
-                itemVendaSelecionado = listViewItemVenda.getSelectionModel().getSelectedItem();
-            }
-        });
+      selecionaItensVenda();
     }
 
 
@@ -155,9 +148,16 @@ public class RealizaDevolucaoController implements Initializable {
     }
 
     @FXML
-    public void selecionaItensVenda(ActionEvent e) {
+    public void selecionaItensVenda() {
 
-
+        listViewItemVenda.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ItemVenda>() {
+            @Override
+            public void changed(ObservableValue<? extends ItemVenda> observable, ItemVenda oldValue, ItemVenda newValue) {
+                int indiceSelecionado = listViewItemVenda.getSelectionModel().getSelectedIndex();
+                //  itemVendaList = (List<ItemVenda>) listViewItemVenda.getSelectionModel().getSelectedItem();
+                itemVendaSelecionado = listViewItemVenda.getSelectionModel().getSelectedItem();
+            }
+        });
 
 
 
