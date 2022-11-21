@@ -35,6 +35,15 @@ public class ItemVenda {
         return  new ItemVenda();
     }
 
+    @Override
+    public String toString() {
+        String itemVendaInfo = "Código do Item Venda: " + getId() + " \n "+
+                " Descrição: "+getComputador().toString();
+        return itemVendaInfo;
+    }
+
+
+
 
 
 }

@@ -6,17 +6,20 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Component
 @FxmlView("realizarDevolucao.fxml")
-public class RealizaDevolucaoController {
+public class RealizaDevolucaoController implements Initializable {
 
     @FXML
     private Label nomeClienteXml = new Label();
@@ -31,10 +34,10 @@ public class RealizaDevolucaoController {
     private Button buttonDevolcaoXml;
 
     @FXML
-    private ListView<String> listViewItemVenda;
+    private ListView<ItemVenda> listViewItemVenda;
 
     @FXML
-    private ListView<String> listViewVenda;
+    private ListView<Venda> listViewVenda;
     @Autowired
     public ClienteDao clientDao;
     @Autowired
@@ -47,11 +50,33 @@ public class RealizaDevolucaoController {
     @Autowired
     public ItemVendaDao itemVendaDao;
 
+    @Autowired
+    public DevolucaoDao devolucaoDao;
+
     public static Cliente cliente = new Cliente();
     public static Funcionario funcionario = new Funcionario();
     public Venda venda = new Venda();
+    public ItemVenda itemVendaSelecionado = new ItemVenda();
     public List<Venda> vendaList = new ArrayList<>();
     public List<ItemVenda> itemVendaList = new ArrayList<>();
+
+    @FXML
+    private Button atualizar;
+
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        listViewItemVenda.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ItemVenda>() {
+            @Override
+            public void changed(ObservableValue<? extends ItemVenda> observable, ItemVenda oldValue, ItemVenda newValue) {
+                int indiceSelecionado = listViewItemVenda.getSelectionModel().getSelectedIndex();
+                //  itemVendaList = (List<ItemVenda>) listViewItemVenda.getSelectionModel().getSelectedItem();
+                itemVendaSelecionado = listViewItemVenda.getSelectionModel().getSelectedItem();
+            }
+        });
+    }
+
 
     @FXML
     public void buscaCliente(ActionEvent e) {
@@ -79,7 +104,7 @@ public class RealizaDevolucaoController {
 
         } catch (Exception error) {
             informationDialog(e, "Cliente não encontrado", "Por favor faça o cadastro do cliente",
-                    "É" + " necessário cliente estar cadastrado para iniciar a venda ");
+                    "É" + " necessário cliente estar cadastrado para iniciar a venda ", true);
         }
 
 
@@ -92,14 +117,11 @@ public class RealizaDevolucaoController {
         try {
             //Pega uma lista de venda de acordo com o cliente id
             vendaList = vendaDao.findByCliente_Id(cliente.getId());
-            //Pega o indice da da venda selecionada e procura essa vemda por meio do findByVendaID
-            //No caso o vendaget(0) tem que ser a venda selecionada
-            itemVendaList = itemVendaDao.findByVenda_Id(vendaList.get(1).getId());
             adicionaListViewVenda();
-           // adicionaListViewsItemVenda();
+            // adicionaListViewsItemVenda();
         } catch (Exception error) {
             informationDialog(e, "Cliente não possui nenhuma venda realizada", "É necessário " +
-                    "ter ao menos uma venda associada para realizar devolução", "Por favor compre algo");
+                    "ter ao menos uma venda associada para realizar devolução", "Por favor compre algo", true);
         }
 
     }
@@ -107,31 +129,76 @@ public class RealizaDevolucaoController {
     public void adicionaListViewVenda() {
         if (listViewVenda.getItems().isEmpty()) {
             for (int i = 0; i < vendaList.size(); i++) {
-                this.listViewVenda.getItems().addAll(vendaList.get(i).toString());
+                this.listViewVenda.getItems().addAll(vendaList.get(i));
             }
         }
-        listViewVenda.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        listViewVenda.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Venda>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-             int indiceSelecionado =   listViewVenda.getSelectionModel().getSelectedIndex();
+            public void changed(ObservableValue<? extends Venda> observable, Venda oldValue, Venda newValue) {
+                int indiceSelecionado = listViewVenda.getSelectionModel().getSelectedIndex();
+                //Pega o indice da da venda selecionada e procura essa venda por meio do findByVendaID
+                //No caso o venda.get(indice) tem que ser a venda selecionada
+                itemVendaList = itemVendaDao.findByVenda_Id(vendaList.get(indiceSelecionado).getId());
                 adicionaListViewsItemVenda();
             }
+
+
         });
 
     }
 
     public void adicionaListViewsItemVenda() {
         if (listViewItemVenda.getItems().isEmpty()) {
-            this.listViewItemVenda.getItems().addAll(itemVendaList.get(0).getComputador().toString());
+            this.listViewItemVenda.getItems().addAll(itemVendaList);
         }
 
     }
 
-    public void informationDialog(ActionEvent event, String title, String headerText, String bottomText) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+    @FXML
+    public void selecionaItensVenda(ActionEvent e) {
+
+
+
+
+
+    }
+
+    @FXML
+    public void realizaDevolucao(ActionEvent event) {
+
+        try {
+
+            String motivo = motivoDevolucaoXml.getText().toString();
+            Devolucao devolucao = new Devolucao();
+            devolucao.setItemVenda(itemVendaSelecionado);
+            devolucao.setFuncionario(funcionario);
+            devolucao.setMotivo(motivo);
+            devolucao.setDtDevolucao(new java.util.Date());
+
+            devolucaoDao.save(devolucao);
+        } catch (Exception error) {
+            informationDialog(event, "Não foi possível realizar a devolução", "Por favor seja paciente",
+                    "Tente mais tarde", true);
+        } finally {
+            informationDialog(event, "Seu comprovante será emitido ", "Devolução registrada com sucesso ",
+                    "Agradeço a paciência", false);
+        }
+
+
+    }
+
+
+    public void informationDialog(ActionEvent event, String title, String headerText, String bottomText, boolean isError) {
+        if (isError) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(bottomText);
         alert.showAndWait();
     }
+
+
+
 }
