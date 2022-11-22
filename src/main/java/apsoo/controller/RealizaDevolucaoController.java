@@ -53,17 +53,12 @@ public class RealizaDevolucaoController implements Initializable {
     @Autowired
     public DevolucaoDao devolucaoDao;
 
-    public static Cliente cliente = new Cliente();
-    public static Funcionario funcionario = new Funcionario();
+    public  Cliente cliente = new Cliente();
+    public  Funcionario funcionario = new Funcionario();
     public Venda venda = new Venda();
     public ItemVenda itemVendaSelecionado = new ItemVenda();
     public List<Venda> vendaList = new ArrayList<>();
     public List<ItemVenda> itemVendaList = new ArrayList<>();
-
-    @FXML
-    private Button atualizar;
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -134,32 +129,24 @@ public class RealizaDevolucaoController implements Initializable {
                 itemVendaList = itemVendaDao.findByVenda_Id(vendaList.get(indiceSelecionado).getId());
                 adicionaListViewsItemVenda();
             }
-
-
         });
-
     }
 
     public void adicionaListViewsItemVenda() {
         if (listViewItemVenda.getItems().isEmpty()) {
             this.listViewItemVenda.getItems().addAll(itemVendaList);
         }
-
     }
 
     @FXML
     public void selecionaItensVenda() {
-
         listViewItemVenda.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ItemVenda>() {
             @Override
             public void changed(ObservableValue<? extends ItemVenda> observable, ItemVenda oldValue, ItemVenda newValue) {
                 int indiceSelecionado = listViewItemVenda.getSelectionModel().getSelectedIndex();
-                //  itemVendaList = (List<ItemVenda>) listViewItemVenda.getSelectionModel().getSelectedItem();
                 itemVendaSelecionado = listViewItemVenda.getSelectionModel().getSelectedItem();
             }
         });
-
-
 
     }
 
@@ -183,10 +170,7 @@ public class RealizaDevolucaoController implements Initializable {
             informationDialog(event, "Seu comprovante será emitido ", "Devolução registrada com sucesso ",
                     "Agradeço a paciência", false);
         }
-
-
     }
-
 
     public void informationDialog(ActionEvent event, String title, String headerText, String bottomText, boolean isError) {
         if (isError) {

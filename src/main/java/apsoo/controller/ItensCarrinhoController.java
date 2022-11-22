@@ -212,7 +212,6 @@ public class ItensCarrinhoController {
 
     public void iniciaVenda() {
         try{
-
             pagamentoDao.save(PagamentoController.pagamento);
             VendaController.venda.setCliente(ItensCarrinhoController.cliente);
             VendaController.venda.setCodigo(99);

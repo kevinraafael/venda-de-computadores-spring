@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="viewAtual" minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.ItensCarrinhoController">
+<VBox fx:id="viewAtual" minHeight="720.0" minWidth="1276.0" prefHeight="889.0" prefWidth="1276.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.ItensCarrinhoController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -55,9 +55,9 @@
     </GridPane>
     <GridPane>
         <columnConstraints>
-            <ColumnConstraints fillWidth="false" maxWidth="1038.0" minWidth="10.0" prefWidth="128.0" />
-            <ColumnConstraints fillWidth="false" maxWidth="623.0" minWidth="10.0" prefWidth="136.0" />
-            <ColumnConstraints fillWidth="false" maxWidth="1049.0" minWidth="10.0" prefWidth="972.0" />
+            <ColumnConstraints fillWidth="false" maxWidth="1038.0" minWidth="10.0" prefWidth="163.0" />
+            <ColumnConstraints fillWidth="false" maxWidth="623.0" minWidth="10.0" prefWidth="178.0" />
+            <ColumnConstraints fillWidth="false" maxWidth="1049.0" minWidth="10.0" prefWidth="895.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -67,7 +67,7 @@
         <children>
             <Label fx:id="totalCarrinho" text="00.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                 <GridPane.margin>
-                    <Insets />
+                    <Insets left="30.0" top="10.0" />
                 </GridPane.margin>
                 <font>
                     <Font name="Arial" size="24.0" />
@@ -84,14 +84,17 @@
                     <Insets left="20.0" />
                 </padding>
             </Label>
-            <Label text="Itens no carrinho:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label contentDisplay="CENTER" prefHeight="16.0" prefWidth="166.0" text="Itens no carrinho:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                 <padding>
-                    <Insets left="20.0" />
+                    <Insets left="35.0" />
                 </padding></Label>
             <Label fx:id="totalQntCarrinho" prefHeight="17.0" prefWidth="0.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <padding>
                     <Insets left="5.0" />
                 </padding>
+            <GridPane.margin>
+               <Insets />
+            </GridPane.margin>
             </Label>
             <Button fx:id="finalizaVenda" mnemonicParsing="false" onAction="#btnVaiParaFinalizaVenda" prefHeight="30.0" prefWidth="277.0" text="Ir para o Carrinho" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          <Button fx:id="buttonDevolucao" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnVaiParaDevolucao" prefHeight="25.0" prefWidth="279.0" text="Ir para Devolução" GridPane.columnIndex="2" GridPane.rowIndex="2" />

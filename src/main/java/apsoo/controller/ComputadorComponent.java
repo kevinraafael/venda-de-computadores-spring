@@ -78,12 +78,7 @@ public class ComputadorComponent extends VBox {
             PagamentoController.pagamento.setValorTotal(Double.valueOf(novoTotal));
             PagamentoController.pagamento.setParcelamento(0);
             PagamentoController.pagamento.setDesconto(0.0);
-
             ItemVenda itemVenda = new ItemVenda();
-            // Setando os valores do item venda
-//            VendaController.itemVenda.setQtdVendida(valorItensCarrinho);
-//            VendaController.itemVenda.setValorVendido(valor);
-//            VendaController.itemVenda.setComputador(computador);
             itemVenda.setQtdVendida(1);
             itemVenda.setValorVendido(valor);
             itemVenda.setComputador(computador);

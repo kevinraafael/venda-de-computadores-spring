@@ -52,7 +52,7 @@ public class FinalizaVendaController {
 
     private Double desconto = 0.0;
 
-    private ObservableList<ItemVenda> obsListItensVenda;
+
 
     public FinalizaVendaController() {
     }
@@ -65,27 +65,6 @@ public class FinalizaVendaController {
         alert.setHeaderText(headerText);
         alert.setContentText(bottomText);
         alert.showAndWait();
-    }
-
-    public void carregarScene(Node parent, Class controller) {
-
-        // Utiliza o parente para acessar a Stage
-        Stage stage = (Stage) parent.getScene().getWindow();
-
-        // Pegar o Bean do JavaFXWeaver
-        FxWeaver fxWeaver = AplicacaoJavaFx.contextoSpring.getBean(FxWeaver.class);
-
-        // O FXWeaver carrega o controlador na memória
-        Parent root = (Parent) fxWeaver.loadView(controller);
-
-        // Associa o controlador a uma cena
-        Scene scene = new Scene(root);
-
-        // Associa a cena à tela atual
-        stage.setScene(scene);
-
-        stage.show();
-
     }
 
     @FXML

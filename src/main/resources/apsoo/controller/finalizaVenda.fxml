@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="paneFinalizaVenda" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.FinalizaVendaController">
+<Pane fx:id="paneFinalizaVenda" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apsoo.controller.FinalizaVendaController">
    <ListView fx:id="listViewItemVenda" layoutX="88.0" layoutY="85.0" prefHeight="200.0" prefWidth="420.0" />
    <Label layoutX="67.0" layoutY="387.0" prefHeight="59.0" prefWidth="216.0" text="Total: R$ " textAlignment="CENTER">
       <font>
@@ -22,7 +22,7 @@
    </Label>
    <Group layoutX="439.0" layoutY="372.0" />
    <Button layoutX="104.0" layoutY="515.0" mnemonicParsing="false" onAction="#btnFinalizaVenda" prefHeight="25.0" prefWidth="387.0" text="Finalizar Venda" />
-   <Label layoutX="388.0" layoutY="300.0" text="Itens no carrinho:" />
+   <Label layoutX="332.0" layoutY="300.0" prefHeight="16.0" prefWidth="188.0" text="Itens no carrinho:" />
    <Label fx:id="totalItensCarrinho" layoutX="486.0" layoutY="300.0" />
 
    <RadioButton fx:id="radioButtonPix" layoutX="465.0" layoutY="416.0" mnemonicParsing="false" text="Pix" />
