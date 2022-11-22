@@ -42,3 +42,5 @@ e passe as seguintes informações:
 - Recomendo a inteliJ como IDE para execução do projeto
 - Por meio dela pode criar um "Run Configuration" e facilitar a execução do mesmo, como o exemplo abaixo:
   ![Logo do Markdown](./imgs/arquivoConfiguracao.jpeg)
+- o Arquivo Computadores Application pode ser comentada após a primeira execução, 
+pois se executado novamente ocasiona erro por tentar adicionar uma pessoa com cpf já previamente cadastrada.
